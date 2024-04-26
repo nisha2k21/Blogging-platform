@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% block content %}
+  <h2>Register</h2>
+  <form method="POST">
+    {{ form.hidden_tag() }}
+    <div class="form-group">
+      {{ form.username.label }} {{ form.username(class="form-control") }}
+    </div>
+    <div class="form-group">
+      {{ form.email.label }} {{ form.email(class="form-control") }}
+    </div>
+    <div class="form-group">
+      {{ form.password.label }} {{ form.password(class="form-control") }}
+    </div>
+    <div class="form-group">
+      {{ form.confirm_password.label }} {{ form.confirm_password(class="form-control") }}
+    </div>
+    <button type="submit" class="btn btn-primary">Register</button>
+  </form>
+  <p>Already have an account? <a href="{{ url_for('login') }}">Login</a></p>
+{% endblock %}
+
+
+{% extends "base.html" %}
+{% block content %}
+  <h2>Login</h2>
+  <form method="POST">
+    {{ form.hidden_tag() }}
+    <div class="form-group">
+      {{ form.email.label }} {{ form.email(class="form-control") }}
+    </div>
+    <div class="form-group">
+      {{ form.password.label }} {{ form.password(class="form-control") }}
+    </div>
+    <div class="form-group">
+      {{ form.remember.label }} {{ form.remember(class="form-check-input") }} Remember Me
+    </div>
+    <button type="submit" class="btn btn-primary">Login</button>
+  </form>
+  <p>Don't have an account? <a href="{{ url_for('register') }}">Sign Up</a></p>
+{% endblock %}
+
+{% extends "base.html" %}
+{% block content %}
+  <h2>{{ post.title }}</h2>
+  <p>{{ post.content }}</p>
+  <hr>
+  <h3>Comments</h3>
+  {% for comment in post.comments %}
+    <p>{{ comment.content }}</p>
+    <small>by {{ comment.user.username }}, {{ comment.date_posted.strftime('%Y-%m-%d %H:%M:%S') }}</small>
+    <hr>
+  {% endfor %}
+  <form method="POST">
+    {{ form.hidden_tag() }}
+    <div class="form-group">
+      {{ form.content.label }} {{ form.content(class="form-control") }}
+    </div>
+    <button type="submit" class="btn btn-primary">Post Comment</button>
+  </form>
+{% endblock %}
+
+
+{% extends "base.html" %}
+{% block content %}
+  <h2>New Category</h2>
+  <form method="POST">
+    {{ form.hidden_tag() }}
+    <div class="form-group">
+      {{ form.name.label }} {{ form.name(class="form-control") }}
+    </div>
+    <button type="submit" class="btn btn-primary">Create Category</button>
+  </form>
+{% endblock %}
